@@ -35,12 +35,7 @@ const Registration = () => {
     return (
         <div className="register-container">
             {/* Background Image */}
-            <div 
-                className="register-bg-image"
-                style={{
-                    backgroundImage: `url(${process.env.PUBLIC_URL}/bg.png)`
-                }}
-            ></div>
+            <div className="register-bg-image"></div>
             
             {/* Overlay 1: distro.png */}
             <div className="register-overlay1-container">

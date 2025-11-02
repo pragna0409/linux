@@ -10,7 +10,6 @@ const VideoPage = ({ videoFile, os }) => {
     const audioRef = useRef(null);
     const [showModal, setShowModal] = useState(false);
     const [showBye, setShowBye] = useState(false);
-    const [statusMessage, setStatusMessage] = useState('');
 
     useEffect(() => {
         const audio = audioRef.current;
@@ -40,41 +39,29 @@ const VideoPage = ({ videoFile, os }) => {
     };
 
     const handleShowBye = () => {
-        // Show "registering" message
-        setStatusMessage('registering');
-        
-        // After 1 second, show "done"
+        setShowBye(true);
+        // Close window/tab after bye image is shown for 7 seconds (static)
         setTimeout(() => {
-            setStatusMessage('done');
+            // Try multiple methods to close the tab
+            // Method 1: Direct close
+            window.close();
             
-            // After another 1 second, show bye image
+            // Method 2: Open blank page and close
             setTimeout(() => {
-                setStatusMessage('');
-                setShowBye(true);
-                // Close window/tab after bye image is shown for 7 seconds (static)
+                window.location.href = 'about:blank';
                 setTimeout(() => {
-                    // Try multiple methods to close the tab
-                    // Method 1: Direct close
                     window.close();
-                    
-                    // Method 2: Open blank page and close
-                    setTimeout(() => {
-                        window.location.href = 'about:blank';
+                    // If still open, show message
+                    if (!document.hidden) {
+                        alert('Thank you for registering! This tab will close automatically.');
+                        // Final attempt
                         setTimeout(() => {
                             window.close();
-                            // If still open, show message
-                            if (!document.hidden) {
-                                alert('Thank you for registering! This tab will close automatically.');
-                                // Final attempt
-                                setTimeout(() => {
-                                    window.close();
-                                }, 1000);
-                            }
-                        }, 100);
-                    }, 100);
-                }, 7000);
-            }, 1000);
-        }, 1000);
+                        }, 1000);
+                    }
+                }, 100);
+            }, 100);
+        }, 7000);
     };
 
     return (
@@ -104,15 +91,6 @@ const VideoPage = ({ videoFile, os }) => {
                     onAdminLogin={handleAdminLogin}
                     onShowBye={handleShowBye}
                 />
-            )}
-
-            {/* Registration Status Messages */}
-            {statusMessage && (
-                <div className="registration-status-overlay">
-                    <div className="registration-status-text">
-                        {statusMessage}
-                    </div>
-                </div>
             )}
 
             {/* Bye Overlay */}

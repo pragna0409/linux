@@ -26,31 +26,17 @@
     box-sizing: border-box;
 }
 
-html {
-    height: 100%;
-    width: 100%;
-    overflow: hidden;
-}
-
 body {
     font-family: 'Arial', sans-serif;
     overflow: hidden;
     height: 100vh;
     width: 100vw;
-    margin: 0;
-    padding: 0;
-    position: fixed;
-    top: 0;
-    left: 0;
 }
 
 .landing-container {
     position: relative;
     width: 100%;
     height: 100vh;
-    height: 100dvh; /* Dynamic viewport height for mobile */
-    min-height: 100vh;
-    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -65,6 +51,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    background-image: url('/bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -133,10 +120,10 @@ body {
     height: 100%;
     z-index: 6;
     display: flex;
-    align-items: center;
+    align-items: flex-end;
     justify-content: center;
     text-align: center;
-    padding-bottom: 0;
+    padding-bottom: 250px;
     animation: fadeIn 0.5s ease-in 1s;
     animation-fill-mode: both;
     opacity: 0;
@@ -311,10 +298,7 @@ body {
 .register-container {
     position: relative;
     width: 100%;
-    height: 100vh;
-    height: 100dvh; /* Dynamic viewport height for mobile */
     min-height: 100vh;
-    min-height: 100dvh;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -328,6 +312,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
+    background-image: url('/bg.png');
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
@@ -761,43 +746,6 @@ body {
     z-index: 1;
 }
 
-.registration-status-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: rgba(0, 0, 0, 0.95);
-    z-index: 99998;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    overflow: hidden;
-}
-
-.registration-status-text {
-    font-family: 'Courier New', 'Monaco', 'Consolas', monospace;
-    font-size: 4rem;
-    font-weight: 300;
-    color: #00ff00;
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    text-shadow: 0 0 10px rgba(0, 255, 0, 0.8), 0 0 20px rgba(0, 255, 0, 0.4);
-    animation: fadeIn 0.3s ease-in;
-}
-
-@media (max-width: 768px) {
-    .registration-status-text {
-        font-size: clamp(2rem, 8vw, 3.5rem);
-    }
-}
-
-@media (max-width: 480px) {
-    .registration-status-text {
-        font-size: clamp(1.5rem, 7vw, 2.5rem);
-    }
-}
-
 .bye-overlay {
     position: fixed;
     top: 0;
@@ -971,28 +919,10 @@ body.dashboard-body {
 
 .dashboard-container {
     min-height: 100vh;
-    min-height: 100dvh;
     background: linear-gradient(135deg, rgba(20, 20, 20, 0.98) 0%, rgba(40, 40, 40, 0.98) 100%);
     padding: 40px 20px;
-    overflow-y: auto;
+    overflow-y: visible;
     overflow-x: hidden;
-    -webkit-overflow-scrolling: touch;
-}
-
-@media (max-width: 768px) {
-    .dashboard-container {
-        padding: 20px 10px;
-    }
-    
-    .table-container {
-        overflow-x: scroll;
-        overflow-y: visible;
-        -webkit-overflow-scrolling: touch;
-    }
-    
-    table {
-        min-width: 600px;
-    }
 }
 
 .dashboard-header {
@@ -1019,7 +949,6 @@ body.dashboard-body {
     overflow-x: auto;
     overflow-y: visible;
     max-height: none;
-    -webkit-overflow-scrolling: touch;
 }
 
 table {
@@ -1134,23 +1063,10 @@ tr:hover {
 }
 
 @media (max-width: 768px) {
-    html, body {
-        height: 100%;
-        height: 100dvh;
-        overflow: hidden;
-    }
-    
     .bg-image { background-size: cover; }
     .glitch-text { font-size: clamp(2rem, 5vw, 3.5rem); padding: 0 15px; }
     .welcome-text-behind h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
-    .welcome-text-front {
-        align-items: center;
-        padding-bottom: 0;
-    }
-    .welcome-text-front h2 { 
-        font-size: clamp(3rem, 8vw, 5rem); 
-        white-space: normal;
-    }
+    .welcome-text-front h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
     .start-button { padding: 15px 40px; font-size: 1.2rem; }
     .overlay-container { align-items: flex-end; }
     .overlay-image { width: 100%; height: 100vh; object-fit: cover; object-position: bottom center; }
@@ -1183,22 +1099,9 @@ tr:hover {
 }
 
 @media (max-width: 480px) {
-    html, body {
-        height: 100%;
-        height: 100dvh;
-        overflow: hidden;
-    }
-    
     .glitch-text { font-size: clamp(1.5rem, 4vw, 2.2rem); padding: 0 10px; }
     .welcome-text-behind h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
-    .welcome-text-front {
-        align-items: center;
-        padding-bottom: 0;
-    }
-    .welcome-text-front h2 { 
-        font-size: clamp(2.5rem, 7vw, 4rem);
-        white-space: normal;
-    }
+    .welcome-text-front h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
     .start-button { padding: 12px 30px; font-size: 1rem; }
     .question-text { font-size: clamp(1rem, 3vw, 1.5rem); }
     .pill-text { font-size: clamp(1.5rem, 4vw, 2.4rem) !important; }

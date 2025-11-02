@@ -24,12 +24,7 @@ const Landing = () => {
     return (
         <div className="landing-container">
             {/* Background Image */}
-            <div 
-                className="bg-image"
-                style={{
-                    backgroundImage: `url(${process.env.PUBLIC_URL}/bg.png)`
-                }}
-            ></div>
+            <div className="bg-image"></div>
             
             {/* Welcome Text (behind overlay) */}
             <div className="welcome-text-behind">
