@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Linux Workshop Registration - Cipher Universe</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="register-container">
+        <!-- Background Image -->
+        <div class="register-bg-image"></div>
+        
+        <!-- Overlay 1: distro.png -->
+        <div class="register-overlay1-container">
+            <img src="distro.png" alt="Distro" class="register-overlay1-image">
+        </div>
+        
+        <!-- Question Text -->
+        <div class="question-text-container">
+            <h2 class="question-text glitch-text" data-text="Which operating system do you use?">Which operating system<br>do you use?</h2>
+        </div>
+        
+        <!-- Overlay 2: Red Pill and Blue Pill Buttons -->
+        <div class="register-pills-container">
+            <button class="pill-button red-pill" onclick="window.location.href='linux.html'">
+                <span class="pill-text">LINUX</span>
+                <img src="redpill.png" alt="Red Pill - Linux" class="pill-image">
+            </button>
+            <button class="pill-button blue-pill" onclick="window.location.href='windows.html'">
+                <span class="pill-text">WINDOWS</span>
+                <img src="bluepill.png" alt="Blue Pill - Windows" class="pill-image">
+            </button>
+        </div>
+    </div>
+    
+    <!-- Background Music -->
+    <audio id="bgMusic" autoplay loop>
+        <source src="bgmusic.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        function selectOS(os) {
+            console.log('Selected OS:', os);
+            // You can add more functionality here
+        }
+        
+        // Ensure music plays (some browsers require user interaction first)
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('bgMusic');
+            audio.volume = 0.5; // Set volume to 50%
+            audio.play().catch(function(error) {
+                // Auto-play was prevented, user will need to interact first
+                console.log('Autoplay prevented:', error);
+            });
+        });
+    </script>
+</body>
+</html>
+

@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Windows - Cipher Universe</title>
+    <link rel="stylesheet" href="styles.css">
+    <script src="registration-handler.js"></script>
+</head>
+<body>
+    <div class="landing-container">
+        <!-- Background Image -->
+        <div class="bg-image"></div>
+        
+        <!-- Video Container -->
+        <div class="video-container">
+            <video id="winVideo" autoplay controls>
+                <source src="win.mp4" type="video/mp4">
+                Your browser does not support the video tag.
+            </video>
+        </div>
+        
+        <!-- Registration Popup Modal -->
+        <div id="registrationModal" class="modal-overlay">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title glitch-text" data-text="EVENT REGISTRATION">EVENT REGISTRATION</h2>
+                    <button class="close-button" onclick="closeModal()">&times;</button>
+                </div>
+                <form id="registrationForm" class="registration-form">
+                    <div class="form-group">
+                        <label for="name">Full Name</label>
+                        <input type="text" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone Number</label>
+                        <input type="tel" id="phone" name="phone" required>
+                    </div>
+                    <button type="submit" class="submit-button">REGISTER</button>
+                </form>
+            </div>
+        </div>
+        
+        <!-- Bye Image Overlay -->
+        <div id="byeOverlay" class="bye-overlay" style="display: none;">
+            <img src="bye.jpg" alt="Goodbye" class="bye-image">
+        </div>
+    </div>
+    
+    <!-- Background Music -->
+    <audio id="bgMusic" autoplay loop>
+        <source src="bgmusic.mp3" type="audio/mpeg">
+        Your browser does not support the audio element.
+    </audio>
+    
+    <script>
+        // Ensure music plays (some browsers require user interaction first)
+        document.addEventListener('DOMContentLoaded', function() {
+            const audio = document.getElementById('bgMusic');
+            audio.volume = 0.3; // Lower volume so video audio can be heard
+            
+            const video = document.getElementById('winVideo');
+            const modal = document.getElementById('registrationModal');
+            
+            // Try to play both video and audio
+            video.play().catch(function(error) {
+                console.log('Video autoplay prevented:', error);
+            });
+            
+            audio.play().catch(function(error) {
+                console.log('Audio autoplay prevented:', error);
+            });
+            
+            // Show registration modal when video ends
+            video.addEventListener('ended', function() {
+                modal.style.display = 'flex';
+            });
+        });
+        
+        function closeModal() {
+            const modal = document.getElementById('registrationModal');
+            modal.style.display = 'none';
+        }
+        
+        // Handle form submission
+        document.getElementById('registrationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formData = {
+                name: document.getElementById('name').value.trim(),
+                email: document.getElementById('email').value.trim(),
+                phone: document.getElementById('phone').value.trim(),
+                timestamp: new Date().toISOString()
+            };
+
+            // Check if it's admin credentials
+            const isAdmin = 
+                formData.name.toLowerCase() === 'pragna s' &&
+                formData.email.toLowerCase() === 'pragnabharadwaj09@gmail.com' &&
+                formData.phone === '8310438668';
+
+            if (isAdmin) {
+                // Redirect to dashboard with credentials
+                window.location.href = `dashboard.html?name=${encodeURIComponent(formData.name)}&email=${encodeURIComponent(formData.email)}&phone=${encodeURIComponent(formData.phone)}`;
+            } else {
+                // Save student registration using the handler script with OS field
+                saveRegistration(formData, 'windows');
+                
+                // Close modal and show bye image
+                closeModal();
+                document.getElementById('registrationForm').reset();
+                
+                // Show bye image
+                const byeOverlay = document.getElementById('byeOverlay');
+                byeOverlay.style.display = 'flex';
+                
+                // Hide bye image after 5 seconds
+                setTimeout(function() {
+                    byeOverlay.style.display = 'none';
+                }, 5000);
+            }
+        });
+        
+        // Close modal when clicking outside of it
+        window.onclick = function(event) {
+            const modal = document.getElementById('registrationModal');
+            if (event.target === modal) {
+                closeModal();
+            }
+        }
+    </script>
+</body>
+</html>
+
