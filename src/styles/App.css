@@ -1141,15 +1141,21 @@ tr:hover {
     .welcome-text-behind h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); }
     .welcome-text-front h2 { font-size: clamp(2rem, 5vw, 3.5rem); }
     .start-button { padding: 15px 40px; font-size: 1.2rem; }
-    .overlay-container { align-items: center; }
+    .overlay-container { 
+        align-items: flex-end;
+        bottom: 0;
+        top: auto;
+    }
     .overlay-image { 
         width: 100%;
         max-width: 100vw;
         height: auto;
         max-height: 90vh;
         max-height: 90dvh;
-        object-fit: contain;
-        object-position: center center;
+        object-fit: cover;
+        object-position: bottom center;
+        transform: scale(1.2);
+        transform-origin: bottom center;
     }
     .question-text { font-size: clamp(2rem, 6vw, 3.5rem); }
     .pill-text { font-size: clamp(2.5rem, 7vw, 4.5rem) !important; }
@@ -1220,15 +1226,21 @@ tr:hover {
     .welcome-text-behind h1 { font-size: clamp(2rem, 5vw, 3.2rem); }
     .welcome-text-front h2 { font-size: clamp(1.5rem, 4vw, 2.2rem); }
     .start-button { padding: 12px 30px; font-size: 1rem; }
-    .overlay-container { align-items: center; }
+    .overlay-container { 
+        align-items: flex-end;
+        bottom: 0;
+        top: auto;
+    }
     .overlay-image { 
         width: 100%;
         max-width: 100vw;
         height: auto;
         max-height: 85vh;
         max-height: 85dvh;
-        object-fit: contain;
-        object-position: center center;
+        object-fit: cover;
+        object-position: bottom center;
+        transform: scale(1.3);
+        transform-origin: bottom center;
     }
     .question-text { font-size: clamp(1rem, 3vw, 1.5rem); }
     .pill-text { font-size: clamp(1.5rem, 4vw, 2.4rem) !important; }
