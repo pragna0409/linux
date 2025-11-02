@@ -48,8 +48,8 @@ const Registration = () => {
             
             {/* Question Text */}
             <div className="question-text-container">
-                <h2 className="question-text glitch-text" data-text="Which operating system do you use?">
-                    Which operating system<br />do you use?
+                <h2 className="question-text glitch-text" data-text="WHICH OPERATING SYSTEM DO YOU USE?">
+                    WHICH OPERATING SYSTEM<br />DO YOU USE?
                 </h2>
             </div>
             

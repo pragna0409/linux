@@ -26,51 +26,40 @@ const Dashboard = () => {
             // Show login form
             setLoading(false);
         } else {
-            loadRegistrationsFromJSONFile();
+            // Fetch directly from Supabase
+            loadRegistrationsFromSupabase();
             // Auto-refresh every 30 seconds
-            const interval = setInterval(loadRegistrations, 30000);
+            const interval = setInterval(() => {
+                loadRegistrationsFromSupabase();
+            }, 30000);
             return () => clearInterval(interval);
         }
     }, [searchParams]);
 
-    const loadRegistrationsFromJSONFile = () => {
-        fetch(process.env.PUBLIC_URL + '/registrations.json')
-            .then(response => {
-                if (response.ok) {
-                    return response.json();
-                }
-                throw new Error('File not found');
-            })
-            .then(data => {
-                localStorage.setItem('registrations', JSON.stringify(data));
-                loadRegistrations();
-            })
-            .catch(() => {
-                loadRegistrations();
-            });
-    };
-
-    const loadRegistrations = () => {
+    const loadRegistrationsFromSupabase = async () => {
         setLoading(true);
         setError('');
         try {
-            const regs = getAllRegistrations();
+            // Fetch directly from Supabase
+            const regs = await getAllRegistrations();
             setRegistrations(regs);
             setLoading(false);
+            setError('');
             if (regs.length === 0) {
                 setError('No registrations found.');
             }
         } catch (err) {
             setLoading(false);
-            setError('Error loading registrations: ' + err.message);
+            setError('Error loading registrations from Supabase: ' + err.message);
+            console.error('Error fetching from Supabase:', err);
         }
     };
 
     const handleImport = async (e) => {
         try {
             const regs = await loadRegistrationsFromFile(e.target);
-            alert('JSON file imported successfully! ' + regs.length + ' registration(s) loaded.');
-            loadRegistrations();
+            alert('JSON file imported successfully! ' + regs.length + ' registration(s) imported to Supabase.');
+            await loadRegistrationsFromSupabase();
             e.target.value = '';
         } catch (err) {
             alert('Error importing JSON file: ' + err);
@@ -190,10 +179,18 @@ const Dashboard = () => {
                     </div>
                 </div>
                 <div style={{ display: 'flex', gap: '20px', justifyContent: 'center', flexWrap: 'wrap' }}>
-                    <button className="refresh-button" onClick={loadRegistrations}>
+                    <button 
+                        className="refresh-button" 
+                        onClick={loadRegistrationsFromSupabase}
+                    >
                         REFRESH
                     </button>
-                    <button className="refresh-button" onClick={exportRegistrationsToJSON}>
+                    <button 
+                        className="refresh-button" 
+                        onClick={async () => {
+                            await exportRegistrationsToJSON();
+                        }}
+                    >
                         EXPORT JSON
                     </button>
                     <button 

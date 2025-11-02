@@ -18,7 +18,7 @@ const RegistrationModal = ({ os, onClose, onAdminLogin, showModal, onShowBye }) 
         if (error) setError('');
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
         
@@ -41,7 +41,7 @@ const RegistrationModal = ({ os, onClose, onAdminLogin, showModal, onShowBye }) 
         } else {
             try {
                 // Save student registration (will throw error if duplicate)
-                saveRegistration(trimmedData, os);
+                await saveRegistration(trimmedData, os);
                 
                 // Close modal and show bye image immediately
                 onClose();
