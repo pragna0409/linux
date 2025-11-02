@@ -43,11 +43,11 @@ const RegistrationModal = ({ os, onClose, onAdminLogin, showModal, onShowBye }) 
                 // Save student registration (will throw error if duplicate)
                 saveRegistration(trimmedData, os);
                 
-                // Close modal and show bye image immediately
+                // Close modal first
                 onClose();
                 setFormData({ name: '', email: '', phone: '' });
                 
-                // Call parent component to show bye overlay
+                // Call parent component to show status messages and bye overlay
                 if (onShowBye) {
                     onShowBye();
                 }
